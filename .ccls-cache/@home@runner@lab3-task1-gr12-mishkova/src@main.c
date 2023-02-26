@@ -1,23 +1,35 @@
-#include <stdlib.h>
+#include "interface.h"
+#include "locale.h"
 #include <stdio.h>
-#include "hello.h"
+#include <stdlib.h>
+#include <time.h>
 
-int main ()
-{
-  float m,km,m1;
-  printf("km = ");
-  scanf("%f",&km);
-  printf("m = ");
-  scanf("%f",&m);
-  m1 = m * 3.6;
-  if(km<m1){
-    printf("%f m/s", m);
+int main(int argc, char *argv[]) {
+  if (argc != 2) {
+    printf("Usage: %s <n>\n", argv[0]);
+    return 1;
   }
-  else if(km>m1){
-    printf("%f km/h", km);
+
+  int n = atoi(argv[1]);
+
+  srand(time(NULL));
+
+  int arr[100];
+  int i;
+  for (i = 0; i < n; i++) {
+    arr[i] = rand() % 100 + 1;
   }
-  else{
-    printf("equals");
+
+  printf("Original array:\n");
+  for (i = 0; i < n; i++) {
+    printf("%d ", arr[i]);
   }
+  printf("\n");
+
+  printf("Rearranged digits:\n");
+  for (i = 0; i < n; i++) {
+    rearrange_digits(arr[i]);
+  }
+
   return 0;
 }
